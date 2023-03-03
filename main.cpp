@@ -1,6 +1,11 @@
-#include <iostream>
+#include "Player.h"
 
 int main() {
-    std::cout << "Hello, world!\n";
+    Deck deck;
+    Player player(deck);
+    std::array < Player, 5 > bot = { Player(deck), Player(deck), Player(deck), Player(deck), Player(deck)};
+    std::cout << "Jucatorul are: \n" << player;
+    for(int i = 0; i < 5; ++i)
+        std::cout << "Botul " << i << " are: \n" << bot[i];
     return 0;
 }
