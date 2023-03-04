@@ -1,4 +1,4 @@
-#include "Player.h"
+#include "FlopTurnRiver.h"
 
 int main() {
     Deck deck;
@@ -7,5 +7,9 @@ int main() {
     std::cout << "Jucatorul are: \n" << player;
     for(int i = 0; i < 5; ++i)
         std::cout << "Botul " << i << " are: \n" << bot[i];
+    FlopTurnRiver ftr(deck);
+    ftr.Flop();
+    ftr.Turn();
+    ftr.River();
     return 0;
 }

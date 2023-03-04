@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 class Card {
 private:
@@ -10,7 +11,7 @@ public:
         suit = "";
         number = "";
     }
-    Card(const std::string suit_, const std::string number_) : suit{suit_}, number{number_} {}
+    Card(const std::string suit_, const std::string number_) : suit{suit_}, number{number_} {};
     const std::string& getSuit() const { return suit; }
     const std::string& getNumber() const { return number; }
     Card& operator=(const Card& other) {
