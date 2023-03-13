@@ -1,4 +1,5 @@
-#include "Player.h"
+#include <array>
+#include "Deck.h"
 
 class FlopTurnRiver {
 private:
@@ -26,5 +27,5 @@ public:
         std::cout << "River: \n" << river;
         return river;
     }
-    ~FlopTurnRiver() {};
+    ~FlopTurnRiver() = default;
 };

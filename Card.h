@@ -1,5 +1,8 @@
+#pragma once
+
 #include <iostream>
 #include <string>
+#include <utility>
 
 class Card {
 private:
@@ -11,7 +14,7 @@ public:
         suit = "";
         number = "";
     }
-    Card(const std::string suit_, const std::string number_) : suit{suit_}, number{number_} {};
+    Card(std::string  suit_, std::string  number_) : suit{std::move( suit_ )}, number{std::move( number_ )} {};
     const std::string& getSuit() const { return suit; }
     const std::string& getNumber() const { return number; }
     Card& operator=(const Card& other) {
@@ -23,5 +26,5 @@ public:
         os << c.number << " of " << c.suit << "\n";
         return os;
     }
-    ~Card() {};
+    ~Card() = default;
 };

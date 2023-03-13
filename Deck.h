@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cstdlib>
 #include "Card.h"
 
@@ -18,10 +20,10 @@ private:
             Card("Clubs", "Six"), Card("Clubs", "Seven"), Card("Clubs", "Eight"), Card("Clubs", "Nine"),
             Card("Clubs", "Ten"), Card("Clubs", "Jack"), Card("Clubs", "Queen"), Card("Clubs", "King")
     };
-    bool freq[52];
+    bool freq[52]{};
 
     // Robert Jenkins' 96 bit Mix Function
-    unsigned long mix(unsigned long a, unsigned long b, unsigned long c) {
+    static unsigned long mix(unsigned long a, unsigned long b, unsigned long c) {
         a=a-b;  a=a-c;  a=a^(c >> 13);
         b=b-c;  b=b-a;  b=b^(a << 8);
         c=c-a;  c=c-b;  c=c^(b >> 13);
@@ -49,7 +51,7 @@ public:
             r %= 52;
         } while(freq[r] == 1);
         freq[r] = true;
-        this->getFreq();
+        //this->getFreq();
         return deck[r];
     }
     void deckReset() {
@@ -61,5 +63,5 @@ public:
             std::cout << freq[i] << " ";
         std::cout << "\n";
     }
-    ~Deck() {};
+    ~Deck() = default;
 };

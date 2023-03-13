@@ -18,5 +18,5 @@ public:
         os << p.hand[0] << "\n" << p.hand[1] << "\n";
         return os;
     }
-    ~Player() {};
+    ~Player() = default;
 };
