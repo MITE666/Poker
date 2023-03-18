@@ -48,7 +48,6 @@ private:
 
     std::pair <bool, Card> CheckTwoPair() {
         bool OK = 0;
-        int maxim = -1;
         Card card;
         int fr[13] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         for(int i = 0; i < 7; ++i)
@@ -59,6 +58,7 @@ private:
                 ++k;
         if(k > 1) {
             OK = 1;
+            int maxim = -1;
             for(int i = 0; i < 7; ++i) {
                 int value = numberValue[cards[i].getNumber()];
                 if(value > maxim && fr[numberValue[cards[i].getNumber()]] == 2) {
@@ -132,13 +132,13 @@ private:
         suits["Clubs"] = 0;
         for(int i = 0; i < 7; ++i)
             ++suits[cards[i].getSuit()];
-        for(const auto& [key, value] : suits)
-            if(value > 4) {
+        for(const auto& kv : suits)
+            if(kv.second > 4) {
                 OK = 1;
                 for(int i = 0; i < 7; ++i) {
-                    int value = numberValue[cards[i].getNumber()];
-                    if(value > maxim) {
-                        maxim = value;
+                    int value_ = numberValue[cards[i].getNumber()];
+                    if(value_ > maxim) {
+                        maxim = value_;
                         card = cards[i];
                     }
                 }
@@ -167,14 +167,14 @@ private:
         for(int i = 0; i < 7; ++i)
             ++numberCount[cards[i].getNumber()];
         bool parts[2] = {0, 0};
-        for(const auto& [key, value] : numberCount) {
-            if(value == 3) {
+        for(const auto& kv : numberCount) {
+            if(kv.second == 3) {
                 if (parts[0] == 1)
                     parts[1] = 1;
                 else
                     parts[0] = 1;
             }
-            else if(value == 2)
+            else if(kv.second == 2)
                 parts[1] = 1;
         }
         if(parts[0] && parts[1]) {
@@ -210,9 +210,9 @@ private:
         for(int i = 0; i < 7; ++i)
             ++numbers[cards[i].getNumber()];
         std::string number;
-        for(const auto& [key, value] : numbers)
-            if(value == 4) {
-                number = key;
+        for(const auto& kv : numbers)
+            if(kv.second == 4) {
+                number = kv.first;
                 OK = 1;
                 break;
             }
@@ -295,10 +295,10 @@ private:
         for(int i = 0; i < 7; ++i)
             ++suits[cards[i].getSuit()];
         std::string maxSuit;
-        for(const auto& [key, value] : suits)
-            if(value > 4) {
+        for(const auto& kv : suits)
+            if(kv.second > 4) {
                 OK = 1;
-                maxSuit = key;
+                maxSuit = kv.first;
                 break;
             }
         if(OK) {
@@ -326,7 +326,7 @@ private:
     }
 
 public:
-    Combination(std::array <Card, 7>& cards_) {
+    explicit Combination(const std::array <Card, 7>& cards_) {
         for(int i = 0; i < 7; ++i)
             cards[i] = cards_[i];
     }

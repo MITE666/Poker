@@ -161,8 +161,8 @@ public:
                     }
             }
             else {
-                int imax;
-                for(int i = 0; i < bots.size(); ++i)
+                int imax = 0;
+                for(int i = 0; i < (int)bots.size(); ++i)
                     if(botsPoints[i] == maxim) {
                         imax = i;
                         break;

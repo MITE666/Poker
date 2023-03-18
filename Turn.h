@@ -9,7 +9,7 @@ private:
 public:
     Turn() = default;
 
-    Turn(int money_) : money{money_} {}
+    explicit Turn(int money_) : money{money_} {}
 
     const int getMoney() { return money; }
 

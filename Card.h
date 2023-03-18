@@ -10,10 +10,7 @@ private:
     std::string number;
 
 public:
-    Card() {
-        suit = "";
-        number = "";
-    }
+    Card() : suit{""}, number{""} {}
     Card(std::string  suit_, std::string  number_) : suit{std::move( suit_ )}, number{std::move( number_ )} {};
     const std::string& getSuit() const { return suit; }
     const std::string& getNumber() const { return number; }

@@ -7,7 +7,7 @@ private:
     Card turn, river;
 
 public:
-    FlopTurnRiver(Deck& deck) {
+    explicit FlopTurnRiver(Deck& deck) {
         for(int i = 0; i < 3; ++i)
             flop[i] = deck.getRandomCard();
         turn = deck.getRandomCard();
