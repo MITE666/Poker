@@ -42,7 +42,7 @@ public:
         for(bool & i : freq)
             i = 0;
     }
-    Card getRandomCard() {
+    Card& getRandomCard() {
         int r;
         do {
             unsigned long seed = mix(clock(), time(nullptr), getpid());
@@ -58,10 +58,6 @@ public:
         for(bool & i : freq)
             i = false;
     }
-    void getFreq() {
-        for(bool i : freq)
-            std::cout << i << " ";
-        std::cout << "\n";
-    }
+
     ~Deck() = default;
 };
