@@ -38,13 +38,13 @@ private:
 
 public:
     Deck() {
-        for(int i = 0; i < 52; ++i)
-            freq[i] = 0;
+        for(bool & i : freq)
+            i = 0;
     }
     Card getRandomCard() {
         int r;
         do {
-            unsigned long seed = mix(clock(), time(NULL), getpid());
+            unsigned long seed = mix(clock(), time(nullptr), getpid());
             srand(seed);
             r = rand();
             r %= 52;
@@ -54,12 +54,12 @@ public:
         return deck[r];
     }
     void deckReset() {
-        for(int i = 0; i < 52; ++i)
-            freq[i] = false;
+        for(bool & i : freq)
+            i = false;
     }
     void getFreq() {
-        for(int i = 0; i < 52; ++i)
-            std::cout << freq[i] << " ";
+        for(bool i : freq)
+            std::cout << i << " ";
         std::cout << "\n";
     }
     ~Deck() = default;

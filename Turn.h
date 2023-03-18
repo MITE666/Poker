@@ -11,7 +11,7 @@ public:
 
     explicit Turn(int money_) : money{money_} {}
 
-    const int getMoney() { return money; }
+    [[nodiscard]] int getMoney() const { return money; }
 
     void Blind(int amount) {
         money -= amount;

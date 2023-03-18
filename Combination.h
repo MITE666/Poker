@@ -53,8 +53,8 @@ private:
         for(int i = 0; i < 7; ++i)
             ++fr[numberValue[cards[i].getNumber()]];
         int k = 0;
-        for(int i = 0; i < 13; ++i)
-            if(fr[i] == 2)
+        for(int i : fr)
+            if(i == 2)
                 ++k;
         if(k > 1) {
             OK = 1;
@@ -241,9 +241,9 @@ private:
             if(length[i] != 0 && length[i+1] != 0)
                 length[i] = length[i+1];
         int lgmax = 0;
-        for(int i = 0; i < 13; ++i)
-            if(length[i] > lgmax)
-                lgmax = length[i];
+        for(int i : length)
+            if(i > lgmax)
+                lgmax = i;
         // Check again for the Ace, 2, 3, 4, 5 situation
         bool specialCase = 0;
         if(lgmax < 5 && straight[0] && straight[1] && straight[2] && straight[3] && straight[12]) {
@@ -319,8 +319,8 @@ private:
                     }
                 }
             }
-            for(int i = 0; i < 5; ++i)
-                OK *= royalFlush[i];
+            for(bool i : royalFlush)
+                OK *= i;
         }
         return std::make_pair(OK, card);
     }

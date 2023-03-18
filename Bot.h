@@ -4,7 +4,7 @@
 
 class Bot {
 private:
-    Turn turn;
+    Turn turn{};
     std::array<Card, 2> hand;
 
 public:
@@ -16,7 +16,7 @@ public:
         turn = Turn(money);
     }
 
-    const std::array< Card, 2 >& getHand() const {
+    [[nodiscard]] const std::array< Card, 2 >& getHand() const {
         return hand;
     }
 

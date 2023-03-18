@@ -10,10 +10,10 @@ private:
     std::string number;
 
 public:
-    Card() : suit{""}, number{""} {}
+    Card() = default;
     Card(std::string  suit_, std::string  number_) : suit{std::move( suit_ )}, number{std::move( number_ )} {};
-    const std::string& getSuit() const { return suit; }
-    const std::string& getNumber() const { return number; }
+    [[nodiscard]] const std::string& getSuit() const { return suit; }
+    [[nodiscard]] const std::string& getNumber() const { return number; }
     Card& operator=(const Card& other) {
         suit = other.getSuit();
         number = other.getNumber();

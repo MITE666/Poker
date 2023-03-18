@@ -4,7 +4,7 @@
 
 class Player {
 private:
-    Turn turn;
+    Turn turn{};
     std::array< Card, 2 > hand;
 
 public:
@@ -14,7 +14,7 @@ public:
         hand[1] = deck.getRandomCard();
         turn = Turn(money);
     }
-    const std::array< Card, 2 >& getHand() const {
+    [[nodiscard]] const std::array< Card, 2 >& getHand() const {
         return hand;
     }
     friend std::ostream& operator<<(std::ostream& os, const Player& p) {
