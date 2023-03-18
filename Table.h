@@ -42,7 +42,7 @@ public:
             for(auto & bot : bots)
                 bot = Bot(deck, bot.getTurn().getMoney());
             std::cout << "Money:\nPlayer: " << player.getTurn().getMoney() << "\n";
-            for(int i = 0; i < bots.size(); ++i)
+            for(int i = 0; i < (int)bots.size(); ++i)
                 std::cout << "Bot number " << i << ": " << bots[i].getTurn().getMoney() << "\n";
             int bank = 0;
             std::array<Card, 5> tableCards;

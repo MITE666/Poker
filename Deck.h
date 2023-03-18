@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdlib>
+#include <unistd.h>
 #include "Card.h"
 
 class Deck {
