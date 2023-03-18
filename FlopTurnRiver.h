@@ -13,17 +13,17 @@ public:
         turn = deck.getRandomCard();
         river = deck.getRandomCard();
     };
-    const std::array < Card, 3 > Flop() {
+    const std::array < Card, 3 >& Flop() {
         std::cout << "Flop: \n";
         for(int i = 0; i < 3; ++i)
             std::cout << flop[i];
         return flop;
     }
-    const Card Turn() {
+    const Card& Turn() {
         std::cout << "Turn: \n" << turn;
         return turn;
     }
-    const Card River() {
+    const Card& River() {
         std::cout << "River: \n" << river;
         return river;
     }

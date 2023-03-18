@@ -40,7 +40,6 @@ public:
     Deck() {
         for(int i = 0; i < 52; ++i)
             freq[i] = 0;
-        std::cout << "Am creat pachetul de carti\n";
     }
     Card getRandomCard() {
         int r;

@@ -352,6 +352,7 @@ public:
             return std::make_pair("Pair", CheckPair().second);
         else if(CheckHighCard().first)
             return std::make_pair("High Card", CheckHighCard().second);
+        return std::make_pair("", Card());
     }
 
     ~Combination() = default;
