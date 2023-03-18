@@ -29,18 +29,18 @@ private:
     FlopTurnRiver ftr;
 
 public:
-    Table(Deck& deck_, int money_) : deck{deck_}, startingMoney{money_}, player{Player(deck_, money_)}, ftr{FlopTurnRiver(deck_)} {
+    Table(Deck& deck_, int money_) : player{Player(deck_, money_)}, deck{deck_}, startingMoney{money_}, ftr{FlopTurnRiver(deck_)} {
         for(int i = 0; i < 5; ++i) {
-            bots.push_back(Bot(deck_, money_));
+            bots.emplace_back(deck_, money_);
         }
     }
 
     void Gameplay() {
-        while(player.getTurn().getMoney() > 0 && bots.size() != 0) {
+        while(player.getTurn().getMoney() > 0 && !bots.empty()) {
             deck.deckReset();
             player = Player(deck, player.getTurn().getMoney());
-            for(int i = 0; i < bots.size(); ++i)
-                bots[i] = Bot(deck, bots[i].getTurn().getMoney());
+            for(auto & bot : bots)
+                bot = Bot(deck, bot.getTurn().getMoney());
             std::cout << "Money:\nPlayer: " << player.getTurn().getMoney() << "\n";
             for(int i = 0; i < bots.size(); ++i)
                 std::cout << "Bot number " << i << ": " << bots[i].getTurn().getMoney() << "\n";
@@ -50,8 +50,8 @@ public:
             std::cout << "Your cards are:\n" << player.getHand()[0] << player.getHand()[1];
             player.getTurn().Blind(startingMoney / 10);
             bank += startingMoney / 10;
-            for(int i = 0; i < bots.size(); ++i) {
-                bots[i].getTurn().Blind(startingMoney / 10);
+            for(auto & bot : bots) {
+                bot.getTurn().Blind(startingMoney / 10);
                 bank += startingMoney / 10;
             }
             std::array<Card, 3> flop = ftr.Flop();
@@ -71,11 +71,11 @@ public:
                     std::cin >> amount;
                     bank += amount;
                 }
-                for(int i = 0; i < bots.size(); ++i) {
-                    if(bots[i].getTurn().Call(amount, 0))
+                for(auto & bot : bots) {
+                    if(bot.getTurn().Call(amount, 0))
                         bank += amount;
                     else
-                        bank += bots[i].getTurn().getMoney();
+                        bank += bot.getTurn().getMoney();
                 }
             }
             tableCards[3] = ftr.Turn();
@@ -93,11 +93,11 @@ public:
                     std::cin >> amount;
                     bank += amount;
                 }
-                for(int i = 0; i < bots.size(); ++i) {
-                    if(bots[i].getTurn().Call(amount, 0))
+                for(auto & bot : bots) {
+                    if(bot.getTurn().Call(amount, 0))
                         bank += amount;
                     else
-                        bank += bots[i].getTurn().getMoney();
+                        bank += bot.getTurn().getMoney();
                 }
             }
             tableCards[4] = ftr.River();
@@ -115,11 +115,11 @@ public:
                     std::cin >> amount;
                     bank += amount;
                 }
-                for(int i = 0; i < bots.size(); ++i) {
-                    if(bots[i].getTurn().Call(amount, 0))
+                for(auto & bot : bots) {
+                    if(bot.getTurn().Call(amount, 0))
                         bank += amount;
                     else
-                        bank += bots[i].getTurn().getMoney();
+                        bank += bot.getTurn().getMoney();
                 }
             }
             std::array<Card, 7> cards;
@@ -132,7 +132,7 @@ public:
             std::cout << "You have: " << combo.first << "\n";
             int playerPoints = combinations[combo.first];
             std::vector<int> botsPoints;
-            for(int i = 0; i < bots.size(); ++i) {
+            for(int i = 0; i < (int)bots.size(); ++i) {
                 cards[5] = bots[i].getHand()[0];
                 cards[6] = bots[i].getHand()[1];
                 combination = Combination(cards);
@@ -143,9 +143,9 @@ public:
             }
             int maxim = playerPoints;
             int maximBots = 0;
-            for(int i = 0; i < botsPoints.size(); ++i) {
-                if(botsPoints[i] > maximBots) {
-                    maximBots = botsPoints[i];
+            for(int botsPoint : botsPoints) {
+                if(botsPoint > maximBots) {
+                    maximBots = botsPoint;
                 }
             }
             if(maxim > maximBots) {
@@ -153,7 +153,7 @@ public:
                 std::cout << "Congratulations! You Won " << bank << "$ on your credit card )) \n";
             }
             else if(maximBots > maxim) {
-                for(int i = 0; i < bots.size(); ++i)
+                for(int i = 0; i < (int)bots.size(); ++i)
                     if(botsPoints[i] == maximBots) {
                         std::cout << "Bot number " << i << " has won " << bank << "$ on his credit card )))\n";
                         bots[i].getTurn().Won(bank);
@@ -189,7 +189,7 @@ public:
                     bots[imax].getTurn().Won(bank / 2);
                 }
             }
-            for(int i = 0; i < bots.size(); ++i)
+            for(int i = 0; i < (int)bots.size(); ++i)
                 if(bots[i].getTurn().getMoney() == 0) {
                     bots.erase(bots.begin() + i);
                     --i;
