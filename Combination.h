@@ -320,7 +320,7 @@ private:
                 }
             }
             for(bool i : royalFlush)
-                OK *= i;
+                OK = OK && i;
         }
         return std::make_pair(OK, card);
     }
