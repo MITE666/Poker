@@ -148,7 +148,6 @@ private:
 
     std::pair <bool, Card> CheckFullHouse() {
         bool OK = 0;
-        int maxim = -1;
         Card card;
         std::map <std::string, int> numberCount;
         numberCount["Ace"] = 0;
@@ -179,6 +178,7 @@ private:
         }
         if(parts[0] && parts[1]) {
             OK = 1;
+            int maxim = -1;
             for(int i = 0; i < 7; ++i) {
                 int value = numberValue[cards[i].getNumber()];
                 if(numberCount[cards[i].getNumber()] == 3 && value > maxim) {
@@ -227,7 +227,6 @@ private:
 
     std::pair <bool, Card> CheckStraightFlush() {
         bool OK = 0;
-        int maxim = -1;
         Card card;
         bool straight[13] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         int length[13] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -264,6 +263,7 @@ private:
                     break;
                 }
             OK = 1;
+            int maxim = -1;
             for(int i = 0; i < 7; ++i) {
                 if(cards[i].getSuit() != maxSuit && length[numberValue[cards[i].getNumber()]] > 4) {
                     OK = 0;
