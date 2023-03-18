@@ -19,7 +19,6 @@ public:
         number = other.getNumber();
         return *this;
     }
-    Card(const Card&) = delete;
     friend std::ostream& operator<<(std::ostream& os, const Card& c) {
         os << c.number << " of " << c.suit << "\n";
         return os;
